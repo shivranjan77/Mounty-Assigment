@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Mounty Frontend Assigment</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,700"
+rel="stylesheet" /> 
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+  <body>
+    <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">TMBD</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="index.html">Home</a></li>
+      <li><button onclick="topRated()">Top Rated</button></li>
+      <li><button onclick="upComing()">Upcoming Movies</button></li>    
+    </ul>
+  </div>
+</nav>
+    
+    <div id="root" style="margin: 10px; 10px; 10px;10px; padding:10px; 10px; 10px;10px; ">
+       <center><h1> Top Rated Movies</h1></center>
+    </div>
+    <div id="root1" style="margin: 10px; 10px; 10px;10px; padding:10px; 10px; 10px;10px; ">
+              <center><h1> Upcoming  Movies</h1></center>
+    </div>
+    
+    <script>
+      
+      function topRated(){
+      var i; 
+      alert("Kindly Reload the Page after doing One activity.");
+      var xhttp=new XMLHttpRequest();
+      xhttp.onreadystatechange=function(){
+      var res=xhttp.responseText;
+      if (this.readyState == 4 && this.status == 200) {
+      var data= JSON.parse(this.response);
+      for(i in data.results){
+      
+        document.getElementById("root").innerHTML+="Title-\t\t\t"+data.results[i].title +"<br>";
+        document.getElementById("root").innerHTML+="Language-\t\t\t"+data.results[i].original_language +"<br>";
+        document.getElementById("root").innerHTML+="Rating-\t\t\t"+data.results[i].vote_average +"<br>";
+        document.getElementById("root").innerHTML+="Overview-\t\t\t"+data.results[i].overview +"<br>";
+        document.getElementById("root").innerHTML+="Release Date -\t\t\t"+data.results[i].release_date +"<br>"+"<br>"+"<br>";
+
+            
+      }  
+
+     
+    }
+    else{
+      console.log('error')
+    }
+};
+xhttp.open("GET","https://api.themoviedb.org/3/movie/top_rated?api_key=9e904d03b6a2288c14c5c71e7638fdbe&language=en-US&page=1",true);
+xhttp.send();
+}
+      function upComing(){
+      var i; 
+      alert("Kindly Reload the Page after doing One activity.");
+      var xhttp=new XMLHttpRequest();
+      xhttp.onreadystatechange=function(){
+      var res=xhttp.responseText;
+      if (this.readyState == 4 && this.status == 200) {
+      var data= JSON.parse(this.response);
+      for(i in data.results){
+      
+        document.getElementById("root1").innerHTML+="Title-\t\t\t"+data.results[i].title +"<br>";
+        document.getElementById("root1").innerHTML+="Language-\t\t\t"+data.results[i].original_language +"<br>";
+        document.getElementById("root1").innerHTML+="Rating-\t\t\t"+data.results[i].vote_average +"<br>";
+        document.getElementById("root1").innerHTML+="Overview-\t\t\t"+data.results[i].overview +"<br>";
+        document.getElementById("root1").innerHTML+="Release Date -\t\t\t"+data.results[i].release_date +"<br>"+"<br>"+"<br>";
+              
+      }
+       
+    }
+    else{
+      console.log('error')
+    }
+};
+xhttp.open("GET","https://api.themoviedb.org/3/movie/upcoming?api_key=9e904d03b6a2288c14c5c71e7638fdbe&language=en-US&page=1",true);
+xhttp.send();
+}
+    </script>
+  </body>
+</html>
